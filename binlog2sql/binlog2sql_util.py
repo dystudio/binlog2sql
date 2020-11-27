@@ -139,7 +139,7 @@ def fix_object(value):
     if isinstance(value, set):
         value = ','.join(value)
     if PY3PLUS and isinstance(value, bytes):
-        return value.decode("utf-8")
+        return value.decode("utf-8","ignore")
     elif not PY3PLUS and isinstance(value, unicode):
         return value.encode("utf-8")
     else:
@@ -246,7 +246,7 @@ def reversed_lines(fin):
     part = ''
     for block in reversed_blocks(fin):
         if PY3PLUS:
-            block = block.decode("utf-8")
+            block = block.decode("utf-8","ignore")
         for c in reversed(block):
             if c == '\n' and part:
                 yield part[::-1]
